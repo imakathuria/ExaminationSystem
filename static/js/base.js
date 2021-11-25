@@ -1,0 +1,1 @@
+$("#myPara").html(`This is y para through JS`)
