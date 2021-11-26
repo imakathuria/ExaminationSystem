@@ -1,0 +1,91 @@
+{% extends "Base.html" %}
+{% block title %}Home{% endblock %}
+{% block linkCss %}
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        background: rgb(197, 211, 211);
+
+    }
+
+    #row {
+        background: white;
+        border-radius: 30px;
+        box-shadow: 12px 12px 22px grey;
+    }
+
+    img {
+        border-top-left-radius: 30px;
+        border-bottom-left-radius: 30px;
+        
+    }
+    .btn1{
+        border: none;
+        outline: none;
+        height: 50px;
+        width: 100%;
+        background-color: black;
+        color: white;
+        border-radius: 4px;
+        font-weight: bold;
+    }
+    .btn1:hover{
+        background: white;
+        border: 2px solid;
+        color:black;
+    }
+</style>
+
+{% endblock %}
+
+
+{% block homeActive %}  {% endblock %}
+
+{% block aboutActive %} {% endblock %}
+
+{% block contactUsActive %}{% endblock %}
+
+{% block content %}
+
+<section class="Form my-5 mx-5">
+    <div class="container">
+        <div class="row no-gutters">
+            <div class="col-lg-5 p-0">
+                <img src="https://images.unsplash.com/photo-1551739440-5dd934d3a94a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fGNvbXB1dGVyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"class="img-fluid" alt="" height=500 >
+            </div>
+            <div class="col-lg-7 px-5 pt-5">
+                <h1 class="font-weight-bold py-3">Login</h1>
+                <h4>Sign in to your account</h4>
+                <form action="">
+                    <div class="form-row">
+                        <div class="col-lg-7">
+                            <input type="email" class="form-control my-3 p-3" placeholder="Email-Address">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-lg-7">
+                            <input type="password" class="form-control my-3 p-3" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-lg-7">
+                            <button type="button" class="btn1 mt-3 mb-5">Login</button>
+                        </div>
+                    </div>
+                    <!-- <br> -->
+                    <p>Don't have an account? <a href="#">Register here</a></p>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<h1>Contact US Page</h1>
+{% endblock %}
