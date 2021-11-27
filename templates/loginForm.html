@@ -1,19 +1,11 @@
 {% extends "Base.html" %}
-{% block title %}Home{% endblock %}
+{% block title %}Login{% endblock %}
 {% block linkCss %}
 <style>
-    * {
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-    }
+    
+    
 
-    body {
-        background: rgb(197, 211, 211);
-
-    }
-
-    #row {
+    .bgbrcss {
         background: white;
         border-radius: 30px;
         box-shadow: 12px 12px 22px grey;
@@ -54,7 +46,7 @@
 
 <section class="Form my-5 mx-5">
     <div class="container">
-        <div class="row no-gutters">
+        <div class="row bgbrcss no-gutters">
             <div class="col-lg-5 p-0">
                 <img src="https://images.unsplash.com/photo-1551739440-5dd934d3a94a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fGNvbXB1dGVyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"class="img-fluid" alt="" height=500 >
             </div>
@@ -87,5 +79,5 @@
 </section>
 
 
-<h1>Contact US Page</h1>
+
 {% endblock %}

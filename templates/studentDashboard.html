@@ -1,0 +1,61 @@
+{% extends "BaseUserLoggedIn.html" %}
+{% block title %}Student Dashboard{% endblock %}
+{% block linkCss %}
+<style>
+    .bgbrcss {
+        background: white;
+        border-radius: 30px;
+        box-shadow: 12px 12px 22px grey;
+    }
+</style>
+{% endblock %}
+{% block homeActive %} {% endblock %}
+
+{% block aboutActive %} {% endblock %}
+
+{% block contactUsActive %}{% endblock %}
+
+{% block content %}
+
+
+
+
+<div class="container pt-5">
+    <h3 class="p-2">Welcome Student</h3>
+   
+            <div class="row ">
+                <div class="col-10">
+                    <table class="table table-bordered" style="border-radius: 5px; ">
+                        <thead>
+                            <tr>
+                                <th scope="col">Roll No.</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Subject</th>
+                                <!-- <th scope="col">Shares</th> -->
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="col">1</th>
+                                <td scope="col">Bootstrap </td>
+                                <td scope="col">Cristina</td>
+                                <!-- <td>2.846</td> -->
+                                <td  scope="col" class="d-flex justify-content-center ">
+                                    <button type="button" class="btn btn-primary" style="margin-right: 30px;">Attempt
+                                        Test</i></button>
+                                    <button type="button" class="btn btn-success">View Result</i></button>
+
+                                </td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    
+
+
+
+{% endblock %}

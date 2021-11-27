@@ -15,6 +15,7 @@ def hello_world():
 def contact_us():
     return render_template('TeacherDashboard.html')
 
+
 @app.route("/about")
 def about_us():
     return render_template('AboutUs.html')

@@ -1,0 +1,101 @@
+{% extends "Base.html" %}
+{% block title %}SignUp{% endblock %}
+{% block linkCss %}
+<style>
+    .bgbrcss {
+        background: white;
+        border-radius: 30px;
+        box-shadow: 12px 12px 22px grey;
+    }
+
+    img {
+        border-top-left-radius: 30px;
+        border-bottom-left-radius: 30px;
+
+    }
+
+    #registerBtn {
+        border: none;
+        outline: none;
+        /* padding: 10px 30px 10px 30px; */
+        height: 50px;
+        width: 100%;
+        background-color: black;
+        color: white;
+        border-radius: 4px;
+        font-weight: bold;
+    }
+
+    #registerBtn:hover {
+        background: white;
+        border: 2px solid;
+        color: black;
+    }
+</style>
+{% endblock %}
+{% block homeActive %} {% endblock %}
+
+{% block aboutActive %} {% endblock %}
+
+{% block contactUsActive %}active{% endblock %}
+
+{% block content %}
+
+<section class="Form my-5 mx-5">
+    <div class="container">
+        <div class="row bgbrcss no-gutters">
+            <div class="col-lg-5 p-0">
+                <img src="https://images.unsplash.com/photo-1574629173115-01ba37282238?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8ZGlhcnl8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
+                    class="img-fluid" alt="" height=700>
+            </div>
+            <div class="col-lg-5 px-5 pt-5 ">
+
+                <h2>Sign up to your account</h2>
+                <br>
+                <form action="">
+                    <div class="form-row">
+                        <div class="form-outline flex-fill ">
+                            <input type="text" id="userName" name="userName" class="form-control p-2"
+                                placeholder="Username" required />
+                            <label class="form-label" for="userName"></label>
+                        </div>
+                        <div class="form-outline flex-fill mb-0">
+                            <input type="email" id="userEmail" name="userEmail" class="form-control p-2"
+                                placeholder="Email" required />
+                            <label class="form-label" for="userEmail"></label>
+                        </div>
+                        <div class="form-outline flex-fill mb-0">
+                            <input type="password" id="userPassword" name="userPassword" placeholder="Password"
+                                class="form-control p-2" required />
+                            <label class="form-label" for="userPassword"></label>
+                        </div>
+                        <div class="form-outline flex-fill mb-0">
+
+
+                            <select id="inputState" class="form-control">
+                                <option selected>Choose...</option>
+                                <option>Teacher</option>
+                                <option>Student</option>
+                            </select>
+
+                        </div>
+                        <div class="form-outline flex-fill mb-0">
+                            <input type="password" id="userPassword" name="userPassword" placeholder="New"
+                                class="form-control my-3 p-2" required />
+                            <label class="form-label" for="userPassword"></label>
+                        </div>
+
+
+                        <div class="col-lg-12 d-flex justify-content-center m-2  ">
+                            <button type="button" id="registerBtn" class=" objectivebutton  ">Register</button>
+                        </div>
+
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section> -->
+
+{% endblock %}
