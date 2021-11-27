@@ -1,0 +1,66 @@
+{% extends "Base.html" %}
+{% block title %}Student View Result{% endblock %}
+{% block linkCss %}
+<style>
+    
+    
+
+    .bgbrcss {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 12px 12px 22px grey;}
+
+        .bgbrcss1:hover{
+        background: green;
+        border: 2px solid;
+        color:white;
+    }
+    
+    </style>
+    {% endblock %}
+{% block homeActive %} {% endblock %}
+
+{% block aboutActive %} {% endblock %}
+
+{% block contactUsActive %}active{% endblock %}
+
+{% block content %}
+
+<div class="container pt-5 " style="min-height: 57vh;" >
+
+        
+        <div class="row mb-5">
+          <div class="col">
+            <h2>Score Card</h2>
+          </div>
+          <div class="col text-right">
+            <h2>Subject Name</h2>
+
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="card bgbrcss">
+              <div class="card-body text-center">
+                <h3>Your Score: 10%</h3>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="card bgbrcss bgbrcss1">
+              <div class="card-body text-center">
+                <h3>PASS/FAIL</h3>
+                
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      
+        
+
+    </div>
+</div>
+
+{% endblock %}
