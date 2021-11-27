@@ -1,0 +1,105 @@
+{% extends "Base.html" %}
+{% block title %}Students Result{% endblock %}
+{% block linkCss %}
+<style>
+    .table-bordered th, .table-bordered td {
+        border: 1px solid #000000;
+    }
+
+    body {
+        background: rgb(197, 211, 211);
+
+    }
+
+    #row {
+        background: white;
+        border-radius: 30px;
+        box-shadow: 12px 12px 22px grey;
+    }
+
+    img {
+        border-top-left-radius: 30px;
+        border-bottom-left-radius: 30px;
+
+    }
+
+    .btn1 {
+        border: none;
+        outline: none;
+        height: 50px;
+        width: 100%;
+        background-color: black;
+        color: white;
+        border-radius: 4px;
+        font-weight: bold;
+    }
+
+    .btn1:hover {
+        background: white;
+        border: 2px solid;
+        color: black;
+    }
+</style>
+
+{% endblock %}
+
+
+{% block homeActive %} {% endblock %}
+
+{% block aboutActive %} {% endblock %}
+
+{% block contactUsActive %}{% endblock %}
+
+{% block content %}
+
+<div class="container pt-5">
+    <h3 class="p-2">Welcome Teacher name</h3>
+
+            <div class="row">
+                <div class="col-12">
+                    <table class="table table-bordered" style="border-radius: 5px; background-color: white;">
+                        <thead>
+                            <tr>
+                                <th scope="col">Roll No.</th>
+                                <th scope="col">Student Name</th>
+                                <th scope="col">Marks</th>
+                                <th scope="col">Result</th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td scope="col">1</th>
+                                <td scope="col">Ayush Kumar</td>
+                                <td scope="col">10 </td>
+                                <td scope="col">Pass </td>
+
+                            </tr>
+                            <tr>
+                                <td scope="col">1</th>
+                                <td scope="col">Ayush Kumar</td>
+                                <td scope="col">10 </td>
+                                <td scope="col">Pass </td>
+
+                            </tr>
+                            <tr>
+                                <td scope="col">1</th>
+                                <td scope="col">Ayush Kumar</td>
+                                <td scope="col">10 </td>
+                                <td scope="col">Pass </td>
+
+                            </tr>
+                            <tr>
+                                <td scope="col">1</th>
+                                <td scope="col">Ayush Kumar</td>
+                                <td scope="col">10 </td>
+                                <td scope="col">Pass </td>
+
+                            </tr>   
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+{% endblock %}
