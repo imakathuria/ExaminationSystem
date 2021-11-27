@@ -1,0 +1,115 @@
+{% extends "Base.html" %}
+{% block title %}Students Result{% endblock %}
+{% block linkCss %}
+<style>
+    .btn {
+        border: 2px solid black;
+        margin-top: 2rem;
+    }
+
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        background: rgb(197, 211, 211);
+
+    }
+
+    #row {
+        background: white;
+        border-radius: 30px;
+        box-shadow: 12px 12px 22px grey;
+    }
+
+    img {
+        border-top-left-radius: 30px;
+        border-bottom-left-radius: 30px;
+
+    }
+
+    .btn1 {
+        border: none;
+        outline: none;
+        height: 50px;
+        width: 100%;
+        background-color: black;
+        color: white;
+        border-radius: 4px;
+        font-weight: bold;
+    }
+
+    .btn1:hover {
+        background: white;
+        border: 2px solid;
+        color: black;
+    }
+</style>
+
+{% endblock %}
+
+
+{% block homeActive %} {% endblock %}
+
+{% block aboutActive %} {% endblock %}
+
+{% block contactUsActive %}{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col p-3">
+            <h3>Welcome Teacher name</h3>
+            <form>
+                <div class="form-group">
+                    <!-- <label for="exampleFormControlTextarea1">Enter content to generate questions</label> -->
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" placeholder="Enter content to generate questions..."></textarea>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        Subjective Type
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        Objective Type
+                    </label>
+                </div>
+                <input class="btn btn-primary" type="submit" value="Generate Test">
+            </form>
+        </div>
+        <div class="col m-3 p-3 border border-2 border-dark rounded-2">
+            <div class="col">
+                <h3 class="text-right">Subject Name</h3>
+                <ul class="list-group wbgcolor">
+                    <li class="list-group-item">Test Name
+                        <button type="button" class="btn btn-light float-end " >Light</button>
+                    </li>
+                </ul>
+                <ul class="list-group mt-2 wbgcolor">
+                    <li class="list-group-item">Test Name
+                        <button type="button" class="btn btn-light float-end " >Light</button>
+                    </li>
+                </ul>
+                <ul class="list-group">
+                    <li class="list-group-item">Test Name
+                        <button type="button" class="btn btn-light float-end " >Light</button>
+                    </li>
+                </ul>
+                <ul class="list-group">
+                    <li class="list-group-item">Test Name
+                        <button type="button" class="btn btn-light float-end " >Light</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+{% endblock %}
