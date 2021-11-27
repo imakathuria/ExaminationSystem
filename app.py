@@ -13,7 +13,7 @@ def hello_world():
 
 @app.route("/contact")
 def contact_us():
-    return render_template('TeacherDashboard.html')
+    return render_template('studentViewResult.html')
 
 
 @app.route("/about")
