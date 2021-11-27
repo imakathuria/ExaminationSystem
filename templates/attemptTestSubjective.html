@@ -1,0 +1,88 @@
+{% extends "Base.html" %}
+{% block title %}Subjective Test{% endblock %}
+
+{% block homeActive %} {% endblock %}
+
+{% block aboutActive %} {% endblock %}
+
+{% block contactUsActive %}active{% endblock %}
+
+{% block content %}
+<style>
+       .Subjectivebutton {
+                    border: none;
+                    outline: none;
+                    height: 50px;
+                    width: 100%;
+                    background-color: rgb(120, 120, 133);
+                    color: white;
+                    border-radius: 4px;
+                    font-weight: bold;
+                }
+            
+                .Subjectivebutton:hover {
+                    background: white;
+                    border: 2px solid;
+                    color: black;
+                }
+</style>
+
+<div class="container">
+    <h2>Subjective test</h2>
+<div class="row">
+    <div class="mb-5">
+        <h4>Login As name</h4>
+    </div>
+<form action="post"></form>
+    <div class="mb-8 px-7">
+        <label  class="form-label">Question : Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quam, eos!</label>
+        
+    </div>
+    <div class="mb-8">
+        <label for="Subjectiveans1" class="form-label">Answer</label>
+        <textarea class="form-control" id="inputSubjectiveans1" rows="3"></textarea>
+    </div>
+    <div class="mb-8">
+        <label  class="form-label">Question :</label>
+        <p> </p>
+        
+    </div>
+    <div class="mb-8">
+        <label for="Subjectiveans2" class="form-label">Answer</label>
+        <textarea class="form-control" id="inputSubjectiveans2" rows="3"></textarea>
+    </div>
+    <div class="mb-8">
+        <label  class="form-label">Question :</label>
+        <p> </p>
+        
+    </div>
+    <div class="mb-3">
+        <label for="Subjectiveans3" class="form-label">Answer</label>
+        <textarea class="form-control" id="inputSubjectiveans3" rows="3"></textarea>
+    </div>
+    <div class="mb-3">
+        <label  class="form-label">Question :</label>
+        <p> </p>
+        
+    </div>
+    <div class="mb-3">
+        <label for="Subjectiveans4" class="form-label">Answer</label>
+        <textarea class="form-control" id="inputSubjectiveans4" rows="3"></textarea>
+    </div>
+    <div class="mb-3">
+        <label  class="form-label">Question :</label>
+        <p> </p>
+        
+    </div>
+    <div class="mb-3">
+        <label for="Subjectiveans5" class="form-label">Answer</label>
+        <textarea class="form-control" id="inputSubjectiveans5 " rows="3"></textarea>
+    </div>
+</div>
+<div class="col-lg-12 d-flex justify-content-center" >
+    <button type="button" class="Subjectivebutton mt-3 mb-8" style="width: 30%;">Submit</button>
+</div>
+</form>
+</div>
+
+{% endblock %}
