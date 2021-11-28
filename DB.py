@@ -1,9 +1,13 @@
 import sqlite3
+import json
 connection = sqlite3.connect("aisystem.db")
-print("Database opened successfully")
-cursor = connection.cursor()
-# delete
-# cursor.execute('''DROP TABLE Student_Info;''')
-connection.execute("create table Student_Info (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, email TEXT UNIQUE NOT NULL, gender TEXT NOT NULL, contact TEXT UNIQUE NOT NULL, dob TEXT NOT NULL, address TEXT NOT NULL)")
-print("Table created successfully")
+connection.row_factory = sqlite3.Row
+db = connection.cursor()
+db.execute("SELECT * FROM Students where roll = 101")
+rows = db.fetchall()
+for row in rows:
+    print("ID:"+str(row["id"])+"\n"+"Name:"+row["name"])
+jsonstr = json.dumps( [dict(ix) for ix in rows] )
+
+print(jsonstr)
 connection.close()   
