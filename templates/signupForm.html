@@ -19,7 +19,7 @@
         outline: none;
         /* padding: 10px 30px 10px 30px; */
         height: 50px;
-        width: 100%;
+        width: 50%;
         background-color: black;
         color: white;
         border-radius: 4px;
@@ -31,17 +31,16 @@
         border: 2px solid;
         color: black;
     }
+    .bdr{
+        border: 2px solid black;
+    }
+    .fntColor{
+        color: rgb(112, 111, 111);
+    }
 </style>
 {% endblock %}
-{% block homeActive %} {% endblock %}
-
-{% block aboutActive %} {% endblock %}
-
-{% block contactUsActive %}active{% endblock %}
-
 {% block content %}
-
-<section class="Form my-5 mx-5">
+<section>
     <div class="container">
         <div class="row bgbrcss no-gutters">
             <div class="col-lg-5 p-0">
@@ -52,50 +51,59 @@
 
                 <h2>Sign up to your account</h2>
                 <br>
-                <form action="">
-                    <div class="form-row">
-                        <div class="form-outline flex-fill ">
-                            <input type="text" id="userName" name="userName" class="form-control p-2"
+                <form method="POST" id="signup">
+                    <div class="form-rows">
+                        <div class="form-outline flex-fill">
+                            <input type="text" id="name" name="name" class="form-control p-2 my-4"
+                                placeholder="Name" required />
+                        </div>
+                        <div class="form-outline flex-fill">
+                            <input type="email" id="username" name="username" class="form-control my-4 p-2"
                                 placeholder="Username" required />
-                            <label class="form-label" for="userName"></label>
                         </div>
-                        <div class="form-outline flex-fill mb-0">
-                            <input type="email" id="userEmail" name="userEmail" class="form-control p-2"
-                                placeholder="Email" required />
-                            <label class="form-label" for="userEmail"></label>
+                        <div class="form-outline flex-fill ">
+                            <input type="password" id="password" name="password" placeholder="Password"
+                                class="form-control my-4 p-2" required />
                         </div>
-                        <div class="form-outline flex-fill mb-0">
-                            <input type="password" id="userPassword" name="userPassword" placeholder="Password"
-                                class="form-control p-2" required />
-                            <label class="form-label" for="userPassword"></label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input mx-3 mb-3" type="radio" name="options" id="inlineRadio1" value="0" required>
+                            <label class="form-check-label mr-5 mb-3 fntColor" for="inlineRadio1">Teacher</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input ml-5 mb-3" type="radio" name="options" id="inlineRadio2" value="1" readonly>
+                            <label class="form-check-label ml-3 mb-3 fntColor" for="inlineRadio2">Student</label>
+                          </div>  
+                        <div class="form-outline flex-fill" id="subjectorroll">
+                            
                         </div>
-                        <div class="form-outline flex-fill mb-0">
-
-
-                            <select id="inputState" class="form-control">
-                                <option selected>Choose...</option>
-                                <option>Teacher</option>
-                                <option>Student</option>
-                            </select>
-
+                     
+                        <div class="col-lg-12 d-flex justify-content-center">
+                        <button type="submit" id="registerBtn" class="btn my-2">Register</button>
                         </div>
-                        <div class="form-outline flex-fill mb-0">
-                            <input type="password" id="userPassword" name="userPassword" placeholder="New"
-                                class="form-control my-3 p-2" required />
-                            <label class="form-label" for="userPassword"></label>
-                        </div>
-
-
-                        <div class="col-lg-12 d-flex justify-content-center m-2  ">
-                            <button type="button" id="registerBtn" class=" objectivebutton  ">Register</button>
-                        </div>
-
-
+                        <p>Already have an account?  <a href="{{url_for('login')}}"> Login here</a></p>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-</section> -->
+</section> 
 
+
+{% endblock %}
+
+{% block linkJs %}
+<script>
+    $('#signup input').on('change', function() {
+       var opt =  $('input[name=options]:checked', '#signup').val();
+       if(opt == 1){
+        $("#subjectorroll").html(`<input type="text" id="roll" 
+        name="roll" placeholder="Roll No." class="form-control mb-4 p-2" required />`); 
+       }
+       else if(opt == 0){
+        $("#subjectorroll").html(`<input type="text" id="subject" 
+        name="subject" placeholder="Subject" class="form-control mb-4 p-2" required />`); 
+       }
+       
+    });
+    </script>
 {% endblock %}

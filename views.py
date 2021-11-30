@@ -1,4 +1,8 @@
 from flask import * 
+from database  import *
+
+
+
 app = Flask(__name__)
 
 
@@ -21,26 +25,64 @@ def contact():
 # 3-static pages -- end
 
 # static routes -- start 
-@app.route("/login")
-def login():
+@app.route("/signup", methods = ["POST","GET"])
+def signup():
+    if request.method == "POST":
+        if request.form["options"] == "1" :
+            print("Student Add request")
+            name = request.form["name"]
+            roll = request.form["roll"]
+            username = request.form["username"]
+            password = request.form["password"] 
+            db = database()
+            db.insert_student(name,roll,username,password)
+            return render_template('signupSucess.html')
+        if request.form["options"] == "0" :
+            print("Teacher Add request")
+            name = request.form["name"]
+            subject = request.form["subject"]
+            username = request.form["username"]
+            password = request.form["password"] 
+            db = database()
+            db.insert_teacher(name,subject,username,password)
+            return render_template('signupSucess.html')
+    if request.method == "GET": 
+        return render_template('signupForm.html')      
+# @app.route("/logout")
+# def logout():
      
-    return render_template('')   
-@app.route("/logout")
-def login():
-     
-    return render_template('') 
+#     return render_template('') 
 
-@app.route("/signup")
+@app.route("/login", methods = ["POST","GET"])
 def login():
-     
-    return render_template('') 
+    if request.method == "POST":
+        if request.form["options"] == "1" :
+            print("Student Login request")
+            username = request.form["username"]
+            password = request.form["password"] 
+            db = database()
+            row = db.check_students(username,password)
+            jsonstr = json.dumps([dict(ix) for ix in row])
+            return redirect(url_for('studentDashboard',jsonstr)) 
+        if request.form["options"] == "0" :
+            print("Teacher Login request")
+            username = request.form["username"]
+            password = request.form["password"] 
+            db = database()
+            row = db.check_teacher(username,password)
+            if row == False:
+                return render_template('signupSucess.html')
+            else:
+                return render_template("teacherDashboard.html")
+    if request.method == "GET":
+        return render_template('loginForm.html') 
 
 # static routes -- End
 # student pages --- Start
-@app.route("/studentDashboard")
-def studentDashboard():
-     
-    return render_template('studentDashboard.html')
+@app.route("/studentDashboard/")
+def studentDashboard(student):
+    print(student)
+    return render_template('studentDashboard.html',student=student)
 
 
 

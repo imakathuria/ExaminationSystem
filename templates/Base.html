@@ -17,7 +17,7 @@
 <body>
   <header>
     <!--- Navbar --->
-    <nav class="navbar fixed-top navbar-expand">
+    <nav class="navbar fixed-top navbar-expand ">
       <div class="container">
         <a class="navbar-brand text-white" href="#"><i class="fa fa-graduation-cap fa-lg mr-2"></i>Question Answer
           Generator</a>
@@ -45,11 +45,11 @@
 
           <ul class="navbar-nav ml-auto">
             <li class="nav-item pl-5">
-              <a class="nav-link" href="#"><i class="fa fa-user-plus fa-fw mr-1"></i>Sign Up</a>
+              <a class="nav-link" href="{{url_for('signup')}}"><i class="fa fa-user-plus fa-fw mr-1"></i>Sign Up</a>
             </li>
 
             <li class="nav-item pl-1">
-              <a class="nav-link" href="#"><i class="fa fa-user fa-fw mr-1"></i>Sign In</a>
+              <a class="nav-link" href="{{url_for('login')}}"><i class="fa fa-user fa-fw mr-1"></i>Sign In</a>
             </li>
           </ul>
         </div>
@@ -57,7 +57,8 @@
     </nav>
     <!--# Navbar #-->
   </header>
-  <div id="content">
+ 
+  <div id="content" class = "mt-5">
     {% block content %}
     {% endblock %}
   </div>
