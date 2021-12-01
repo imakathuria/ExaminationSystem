@@ -1,1 +1,1 @@
-app.run(debug=True) 
+nt(jsonstr1)

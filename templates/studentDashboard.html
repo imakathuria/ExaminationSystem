@@ -1,5 +1,6 @@
-{% extends "BaseUserLoggedIn.html" %}
+{% extends "BaseLoggedIn.html" %}
 {% block title %}Student Dashboard{% endblock %}
+{% block homelink %}{% endblock%}
 {% block linkCss %}
 <style>
     .bgbrcss {
@@ -21,7 +22,7 @@
 
 
 <div class="container pt-5">
-    <h3 class="p-2">Welcome {{student["name"]}}</h3>
+    <h3 class="p-2" id="welcome"> </h3>
    
             <div class="row ">
                 <div class="col-10">
@@ -58,4 +59,18 @@
 
 
 
+{% endblock %}
+
+{% block linkJs %}
+<script>
+jsonstr = '{{student}}';
+student = JSON.parse(jsonstr.replace(/&#34;/g,'"'));
+$( window ).on( "load", function() {
+    displayWelcome();
+    });
+function displayWelcome(){
+   
+    $("#welcome").html(`Welcome Student, ${student[0].name} (${student[0].roll})`)
+}
+</script>
 {% endblock %}

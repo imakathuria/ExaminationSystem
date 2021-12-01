@@ -1,4 +1,5 @@
 import sqlite3
+import json
 
 class database:
     def __init__(self):
@@ -38,7 +39,8 @@ class database:
         db = self.connection.cursor()
         db.execute("SELECT * FROM Teachers where id = ?",str(id))
         rows = db.fetchall()
-        return rows[0];
+        jsonstr = json.dumps([dict(ix) for ix in rows])
+        return jsonstr;
 
     def insert_teacher(self,name, subject,username,password):
         db = self.connection.cursor()
@@ -46,4 +48,27 @@ class database:
         self.connection.commit()
         print("Teacher added successfully")
 
-    
+    def get_teacher_username(self):
+        db = self.connection.cursor()
+        db.execute("SELECT username FROM Teachers")
+        rows = db.fetchall()
+        return rows
+    def get_student_username(self):
+        db = self.connection.cursor()
+        db.execute("SELECT username FROM Students")
+        rows = db.fetchall()
+        return rows
+
+    def set_test(self,teacherid,subject,testtype,datesubmitted,questions):
+        db = self.connection.cursor()
+        db.execute("INSERT INTO Test(teacherid,subject,type,datesubmitted,question1,question2,question3,question4,question5) VALUES(?,?,?,?,?,?,?,?,?)",(teacherid,subject,testtype,datesubmitted,questions[0],questions[1],questions[2],questions[3],questions[4]))
+        self.connection.commit()
+        print("Test added successfully")
+
+    def get_testsbyid(self, id):
+        db = self.connection.cursor()
+        db.execute("SELECT id,subject,type,datesubmitted FROM Test WHERE teacherid = ?",str(id))
+        rows = db.fetchall()
+        jsonstr = json.dumps([dict(ix) for ix in rows])
+        print(jsonstr)
+        return jsonstr
