@@ -72,3 +72,11 @@ class database:
         jsonstr = json.dumps([dict(ix) for ix in rows])
         print(jsonstr)
         return jsonstr
+
+    def get_resultbytestid(self,id):
+        db = self.connection.cursor()
+        db.execute("SELECT * FROM Result WHERE teacherid = ?",str(id))
+        rows = db.fetchall()
+        jsonstr = json.dumps([dict(ix) for ix in rows])
+        print(jsonstr)
+        return jsonstr

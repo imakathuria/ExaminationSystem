@@ -43,14 +43,18 @@ class ObjectiveTest:
 			if question_set["Key"] > 3:
 				print(question_set)
 				question_answers.append(question_set)
-
+		print("Length of QS"+str(len(question_answers)))
 		# Create objective test set
 		questions, answers = list(), list()
 		while len(questions) < num_questions:
+			# print("while loop chli hai")	
 			rand_num = np.random.randint(0, len(question_answers))
+			# print(rand_num)
 			if question_answers[rand_num]["Question"] not in questions:
+				print("if k anddar")			
 				questions.append(question_answers[rand_num]["Question"])
 				answers.append(question_answers[rand_num]["Answer"])
+				print("return ho rha hai")
 		return questions, answers
 
 	def get_question_sets(self) -> list:

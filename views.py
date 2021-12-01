@@ -95,33 +95,9 @@ def studentDashboard(student):
 
 
 
-@app.route("/test")
-def getTest():
-    
-    return render_template('attemptTestObjective.html')
-
-@app.route("/result/<id>")
-def result(id):
-    pass
- 
-
-@app.route("/studentViewResult")
-def studentViewResult():
-    
-    return render_template('studentViewResult.html')
-
-# student pages ----End
-
-# teacher pages -------start
-@app.route("/teacherDashboard/<id>", methods = ["POST","GET"])
-def teacherDashboard(id):
+@app.route("/generate_test",methods = ["POST"])
+def generate_test():
     today = date.today()
-    db = database()
-    teacher = db.get_teacher(id)
-    print("teacher got")
-    tests = db.get_testsbyid(session["id"])
-    print("test got")
-
     datesubmitted = today.strftime("%d/%m/%Y")
     if request.method == "POST":
         print("post called")
@@ -141,9 +117,32 @@ def teacherDashboard(id):
             db.set_test(teacherid,subject,"Objective Test",datesubmitted,question_list)
             print("data send to db")
             print(global_answers)
-            return render_template('teacherDashboard.html',teacher=teacher,tests=tests)
-    if request.method == "GET":
-        return render_template('teacherDashboard.html',teacher=teacher, tests=tests)
+            return redirect(url_for('teacherDashboard'))
+    return render_template('attemptTestObjective.html')
+
+@app.route("/result/<id>")
+def result(id):
+    db = database()
+    result = db.get_resultbytestid(id)
+    return render_template("teacherViewResult.html",result = result)
+ 
+
+@app.route("/studentViewResult")
+def studentViewResult():
+    
+    return render_template('studentViewResult.html')
+
+# student pages ----End
+
+# teacher pages -------start
+@app.route("/teacherDashboard")
+def teacherDashboard():
+    db = database()
+    teacher = db.get_teacher(session["id"])
+    print("teacher got")
+    tests = db.get_testsbyid(session["id"])
+    print("test got")
+    return render_template('teacherDashboard.html',teacher=teacher, tests=tests)
 
 @app.route("/teacherViewResult")
 def teacherViewResult():
