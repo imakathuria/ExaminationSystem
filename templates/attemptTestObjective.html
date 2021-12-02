@@ -84,10 +84,43 @@
             <input class="form-control form-control-lg" type="text"  >
         </div>
     </div>
+    <input type="hidden" id="testid" name="testid" value="">
+    <input type="hidden" id="teacherid" name="teacherid" value="">
+    <input type="hidden" id="studentroll" name="studentroll" value="">
+    <input type="hidden" id="studentname" name="custId" value="">
+    <input type="hidden" id="subject" name="subject" value="">
     <div class="col-lg-12 d-flex justify-content-center">
-        <button type="button" class=" objectivebutton mt-3 mb-8">Submit</button>
+        <button type="submit" class=" objectivebutton mt-3 mb-8">Submit</button>
     </div>
     </form>
 </div>
 
 {% endblock  %}
+
+{% block linkJs %}
+<script>
+    jsonstrstudent = '{{student}}';
+    jsonstrtest = '{{test}}';
+    student = JSON.parse(jsonstrstudent.replace(/&#34;/g,'"')); 
+    test = JSON.parse(jsonstrtest.replace(/&#34;/g,'"')); 
+    console.log(student[0])
+    console.log(test[0])
+
+$( window ).on( "load", function() {
+    displayWelcome();
+    displaytest();
+    });
+function displayWelcome(){
+  
+}
+
+function displaytest(){
+
+    
+    
+        
+}
+
+</script>
+
+{% endblock %}

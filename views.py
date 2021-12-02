@@ -67,8 +67,10 @@ def login():
             if len(row)==0:
                 return redirect(url_for('login'))
             else:
-                jsonstr = json.dumps([dict(ix) for ix in row])
-                return redirect(url_for('studentDashboard',student = jsonstr)) 
+                student = row[0]
+                session["user"] = "1"
+                session["studentid"] = student["id"]
+                return redirect(url_for('studentDashboard')) 
         if request.form["options"] == "0" :
             print("Teacher Login request")
             username = request.form["username"]
@@ -80,20 +82,53 @@ def login():
             else:
                 teacher = row[0]
                 session["user"] = "0"
-                session["id"] = teacher["id"]
-               
-                return redirect(url_for('teacherDashboard',id = teacher["id"])) 
+                session["teacherid"] = teacher["id"]
+                return redirect(url_for('teacherDashboard')) 
     if request.method == "GET":
         return render_template('loginForm.html') 
 
 # static routes -- End
 # student pages --- Start
-@app.route("/studentDashboard/<student>")
-def studentDashboard(student):
-    print(student)
-    return render_template('studentDashboard.html',student=student)
+@app.route("/studentDashboard")
+def studentDashboard():
+    db = database()
+    student= db.get_student(session["studentid"])
+    tests= db.get_tests();
+    return render_template('studentDashboard.html',student=student, tests=tests)
 
 
+
+@app.route("/attempttest/<testtype>/<testid>")
+def attempttest(testtype,testid):
+    db = database()
+    student= db.get_student(session["studentid"])
+    test= db.get_testsbytestid(testid);
+    if(testtype =='Objective Test'):
+        return render_template('attemptTestObjective.html',student=student, test=test)
+    if(testtype =='Subjective Test'):
+        return render_template('attemptTestSubjective.html',student=student, test=test)
+
+
+
+
+
+# student pages ----End
+
+# teacher pages -------start
+@app.route("/teacherDashboard")
+def teacherDashboard():
+    db = database()
+    teacher = db.get_teacher(session["teacherid"])
+    print("teacher got")
+    tests = db.get_testsbyid(session["teacherid"])
+    print("test got")
+    return render_template('teacherDashboard.html',teacher=teacher, tests=tests)
+
+@app.route("/result/<id>")
+def result(id):
+    db = database()
+    result = db.get_resultbytestid(id)
+    return render_template("teacherViewResult.html",result = result)
 
 @app.route("/generate_test",methods = ["POST"])
 def generate_test():
@@ -120,33 +155,5 @@ def generate_test():
             return redirect(url_for('teacherDashboard'))
     return render_template('attemptTestObjective.html')
 
-@app.route("/result/<id>")
-def result(id):
-    db = database()
-    result = db.get_resultbytestid(id)
-    return render_template("teacherViewResult.html",result = result)
- 
-
-@app.route("/studentViewResult")
-def studentViewResult():
-    
-    return render_template('studentViewResult.html')
-
-# student pages ----End
-
-# teacher pages -------start
-@app.route("/teacherDashboard")
-def teacherDashboard():
-    db = database()
-    teacher = db.get_teacher(session["id"])
-    print("teacher got")
-    tests = db.get_testsbyid(session["id"])
-    print("test got")
-    return render_template('teacherDashboard.html',teacher=teacher, tests=tests)
-
-@app.route("/teacherViewResult")
-def teacherViewResult():
-    
-    return render_template('teacherViewResult.html')
 # teacher pages -------End
      

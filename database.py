@@ -10,7 +10,8 @@ class database:
         db = self.connection.cursor()
         db.execute("SELECT * FROM Students where id = ?",str(id))
         rows = db.fetchall()
-        return rows[0];
+        jsonstr = json.dumps([dict(ix) for ix in rows])
+        return jsonstr;
 
 
     def check_students(self, username,password):
@@ -76,6 +77,22 @@ class database:
     def get_resultbytestid(self,id):
         db = self.connection.cursor()
         db.execute("SELECT * FROM Result WHERE teacherid = ?",str(id))
+        rows = db.fetchall()
+        jsonstr = json.dumps([dict(ix) for ix in rows])
+        print(jsonstr)
+        return jsonstr
+
+    def get_tests(self):
+        db = self.connection.cursor()
+        db.execute("SELECT * FROM Test")
+        rows = db.fetchall()
+        jsonstr = json.dumps([dict(ix) for ix in rows])
+        print(jsonstr)
+        return jsonstr
+
+    def get_testsbytestid(self,id):
+        db = self.connection.cursor()
+        db.execute("SELECT * FROM Test WHERE id = ?",str(id))
         rows = db.fetchall()
         jsonstr = json.dumps([dict(ix) for ix in rows])
         print(jsonstr)
