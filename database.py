@@ -60,9 +60,10 @@ class database:
         rows = db.fetchall()
         return rows
 
-    def set_test(self,teacherid,subject,testtype,datesubmitted,questions):
+    def set_test(self,teacherid,subject,testtype,datesubmitted,questions,answers_set):
+        answers = json.dumps(answers_set)
         db = self.connection.cursor()
-        db.execute("INSERT INTO Test(teacherid,subject,type,datesubmitted,question1,question2,question3,question4,question5) VALUES(?,?,?,?,?,?,?,?,?)",(teacherid,subject,testtype,datesubmitted,questions[0],questions[1],questions[2],questions[3],questions[4]))
+        db.execute("INSERT INTO Test(teacherid,subject,type,datesubmitted,question1,question2,question3,question4,question5,answers) VALUES(?,?,?,?,?,?,?,?,?,?)",(teacherid,subject,testtype,datesubmitted,questions[0],questions[1],questions[2],questions[3],questions[4],answers))
         self.connection.commit()
         print("Test added successfully")
 
@@ -84,7 +85,7 @@ class database:
 
     def get_tests(self):
         db = self.connection.cursor()
-        db.execute("SELECT * FROM Test")
+        db.execute("SELECT id,teacherid,subject,type,datesubmitted,question1,question2,question3,question4,question5 FROM Test")
         rows = db.fetchall()
         jsonstr = json.dumps([dict(ix) for ix in rows])
         print(jsonstr)
@@ -97,3 +98,10 @@ class database:
         jsonstr = json.dumps([dict(ix) for ix in rows])
         print(jsonstr)
         return jsonstr
+
+    def get_answers(self, testid):
+        db = self.connection.cursor()
+        db.execute("SELECT answers FROM Test WHERE testid = ?",(testid))
+        row = db.fetchall()
+        answerlist = json.loads(row["answers"])
+        return answerlist

@@ -215,3 +215,5 @@ class ObjectiveTest:
 				if len(similar_words) == 8:
 					break
 			return similar_words
+
+	

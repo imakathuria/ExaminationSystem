@@ -7,7 +7,6 @@ from objective import ObjectiveTest
 app = Flask(__name__)
 app.secret_key = 'aiexaminationsystemquestionanswergenrator'
 
-global_answers = list()
 # 3-static pages -- start
 @app.route("/")
 @app.route("/index")
@@ -108,7 +107,17 @@ def attempttest(testtype,testid):
     if(testtype =='Subjective Test'):
         return render_template('attemptTestSubjective.html',student=student, test=test)
 
+@app.route("/submittest", methods = ["POST"])
+def submittest():
+    db = database()
+    testid = request.form["testid"]
+    testtype = request.form["testtype"]
+    teacherid = request.form["teacherid"]
+    studentroll = request.form["studentroll"]
+    studentname = request.form["studentname"]
+    subject = request.form["subject"]
 
+    return render_template()
 
 
 
@@ -146,14 +155,11 @@ def generate_test():
             objective_generator = ObjectiveTest(rawdata)
             question_list, answer_list = objective_generator.generate_test()
             print("test generated")
-            for ans in answer_list:
-                global_answers.append(ans)
             db = database()
-            db.set_test(teacherid,subject,"Objective Test",datesubmitted,question_list)
+            db.set_test(teacherid,subject,"Objective Test",datesubmitted,question_list,answer_list)
             print("data send to db")
-            print(global_answers)
             return redirect(url_for('teacherDashboard'))
     return render_template('attemptTestObjective.html')
 
-# teacher pages -------End
+
      
