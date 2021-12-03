@@ -8,7 +8,7 @@ class database:
 
     def get_student(self, id):
         db = self.connection.cursor()
-        db.execute("SELECT * FROM Students where id = ?",str(id))
+        db.execute("SELECT * FROM Students where id = ?",(str(id),))
         rows = db.fetchall()
         jsonstr = json.dumps([dict(ix) for ix in rows])
         return jsonstr;
