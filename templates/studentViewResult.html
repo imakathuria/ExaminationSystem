@@ -1,28 +1,14 @@
-{% extends "Base.html" %}
+{% extends "BaseLoggedIn.html" %}
 {% block title %}Student View Result{% endblock %}
 {% block linkCss %}
 <style>
-    
-    
-
     .bgbrcss {
         background: white;
         border-radius: 15px;
-        box-shadow: 12px 12px 22px grey;}
-
-        .bgbrcss1:hover{
-        background: green;
-        border: 2px solid;
-        color:white;
-    }
-    
+        box-shadow: 12px 12px 22px grey;
+    } 
     </style>
     {% endblock %}
-{% block homeActive %} {% endblock %}
-
-{% block aboutActive %} {% endblock %}
-
-{% block contactUsActive %}active{% endblock %}
 
 {% block content %}
 
@@ -34,7 +20,7 @@
             <h2>Score Card</h2>
           </div>
           <div class="col text-right">
-            <h2>Subject Name</h2>
+            <h2 id="subname"></h2>
 
           </div>
         </div>
@@ -43,17 +29,12 @@
           <div class="col-sm-6">
             <div class="card bgbrcss">
               <div class="card-body text-center">
-                <h3>Your Score: 10%</h3>
+                <h3 id="score"></h3>
               </div>
             </div>
           </div>
-          <div class="col-sm-6">
-            <div class="card bgbrcss bgbrcss1">
-              <div class="card-body text-center">
-                <h3>PASS/FAIL</h3>
-                
-                
-              </div>
+          <div class="col-sm-6" id="resultpanel" >
+            
             </div>
           </div>
         </div>
@@ -63,4 +44,42 @@
     </div>
 </div>
 
+{% endblock %}
+
+{% block linkJs %}
+<script>
+resultjsonstr = '{{result}}';
+result = JSON.parse(resultjsonstr.replace(/&#34;/g,'"'));
+console.log(result)
+$( window ).on( "load", function() {
+    displayWelcome();
+    displayresult();
+    });
+function displayWelcome(){
+   
+    // $("#welcome").html(`Welcome Student, ${student[0].name} (${student[0].roll})`)
+    $("#subname").html(result[0].subject)
+
+  }
+function displayresult(){
+  renderhtml = ""
+  if(result[0].result == "Pass"){
+    renderhtml += 
+    `<div class="card bgbrcss" style="background-color:green" >
+              <div class="card-body text-center" >
+                <h3  style="color: white;">PASS</h3>
+              </div>`
+  }
+  if(result[0].result == "Fail"){
+    renderhtml += 
+    `<div class="card bgbrcss" style="background-color:red" >
+              <div class="card-body text-center" >
+                <h3  style="color: white;">Fail</h3>
+              </div>`
+
+  }
+  $("#resultpanel").html(renderhtml)
+  $("#score").html(`Your Score: ${result[0].marks}%`)
+}
+</script>
 {% endblock %}

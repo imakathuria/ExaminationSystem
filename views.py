@@ -2,6 +2,7 @@ from flask import *
 from database  import *
 from datetime import date
 from objective import ObjectiveTest
+from evaluatetest import EvaluateTest  
 
 
 app = Flask(__name__)
@@ -100,8 +101,9 @@ def studentDashboard():
 @app.route("/attempttest/<testtype>/<testid>")
 def attempttest(testtype,testid):
     db = database()
+    db1 = database()
     student= db.get_student(session["studentid"])
-    test= db.get_testsbytestid(testid);
+    test= db1.get_testsbytestid(testid);
     if(testtype =='Objective Test'):
         return render_template('attemptTestObjective.html',student=student, test=test)
     if(testtype =='Subjective Test'):
@@ -110,20 +112,33 @@ def attempttest(testtype,testid):
 @app.route("/submittest", methods = ["POST"])
 def submittest():
     db = database()
+    user_ans = list()
+    user_ans.append(str(request.form["objectiveans1"]).strip().upper())
+    user_ans.append(str(request.form["objectiveans2"]).strip().upper())
+    user_ans.append(str(request.form["objectiveans3"]).strip().upper())
+    user_ans.append(str(request.form["objectiveans4"]).strip().upper())
+    user_ans.append(str(request.form["objectiveans5"]).strip().upper())
     testid = request.form["testid"]
     testtype = request.form["testtype"]
     teacherid = request.form["teacherid"]
     studentroll = request.form["studentroll"]
     studentname = request.form["studentname"]
     subject = request.form["subject"]
+    et = EvaluateTest()
+    result,total_score = et.evalute_objective_test(testid, user_ans)
+    db.set_result(testid,testtype,teacherid,studentroll,studentname,subject,total_score,result)
+    return redirect(url_for('studentDashboard'))
 
-    return render_template()
-
-
+@app.route("/viewstudentresult/<testid>/<studentroll>")
+def viewstudentresult(testid,studentroll):
+    db = database()
+    result = db.get_result_by_roll(testid,studentroll)
+    return render_template("studentViewResult.html",result = result)
 
 # student pages ----End
 
 # teacher pages -------start
+
 @app.route("/teacherDashboard")
 def teacherDashboard():
     db = database()

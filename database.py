@@ -75,6 +75,13 @@ class database:
         print(jsonstr)
         return jsonstr
 
+    def set_result(self,testid,testtype,teacherid,studentroll,student,subject,marks,result):
+        db = self.connection.cursor()
+        db.execute("INSERT INTO Result(testid,testtype,teacherid,studentroll,student,subject,marks,result) VALUES (?,?,?,?,?,?,?,?)",(testid,testtype,teacherid,studentroll,student,subject,marks,result))
+        self.connection.commit()
+        print("Result added successfully")
+        
+
     def get_resultbytestid(self,id):
         db = self.connection.cursor()
         db.execute("SELECT * FROM Result WHERE teacherid = ?",str(id))
@@ -91,17 +98,31 @@ class database:
         print(jsonstr)
         return jsonstr
 
-    def get_testsbytestid(self,id):
+    def get_testsbytestid(self,testid):
+        print("--------------------------------------------------------------------------------------------------")
+        print(testid)
         db = self.connection.cursor()
-        db.execute("SELECT * FROM Test WHERE id = ?",str(id))
+        db.execute("SELECT id, teacherid, subject, type, datesubmitted, question1, question2, question3, question4, question5 FROM Test WHERE id = ?",(str(testid),))
         rows = db.fetchall()
         jsonstr = json.dumps([dict(ix) for ix in rows])
         print(jsonstr)
         return jsonstr
 
     def get_answers(self, testid):
+        answerlist = list()
         db = self.connection.cursor()
-        db.execute("SELECT answers FROM Test WHERE testid = ?",(testid))
-        row = db.fetchall()
-        answerlist = json.loads(row["answers"])
+        db.execute("SELECT answers FROM Test WHERE id = ?",(str(testid),))
+        rows = db.fetchall()
+        row = rows[0]
+        jsonlist = json.loads(row["answers"])
+        for x in jsonlist:
+            answerlist.append(str(x.strip().upper()))
         return answerlist
+    
+    def get_result_by_roll(self,testid,studentroll):
+        db = self.connection.cursor()
+        db.execute("SELECT * FROM Result WHERE testid = ? AND studentroll = ?",(str(testid),str(studentroll)))
+        rows = db.fetchall()
+        jsonstr = json.dumps([dict(ix) for ix in rows])
+        print(jsonstr)
+        return jsonstr
