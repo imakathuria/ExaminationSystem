@@ -58,6 +58,7 @@ def logout():
     if session["user"] ==0:
         session.clear("teacher",None)
         return redirect(url_for('login')) 
+    return redirect(url_for('login')) 
 
 @app.route("/login", methods = ["POST","GET"])
 def login():
