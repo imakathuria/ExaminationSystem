@@ -50,10 +50,14 @@ def signup():
             return render_template('signupSucess.html')
     if request.method == "GET": 
         return render_template('signupForm.html')      
-# @app.route("/logout")
-# def logout():
-     
-#     return render_template('') 
+@app.route("/logout")
+def logout():
+    if session["user"] ==1:
+        session.clear("studentid",None)
+        return redirect(url_for('login')) 
+    if session["user"] ==0:
+        session.clear("teacher",None)
+        return redirect(url_for('login')) 
 
 @app.route("/login", methods = ["POST","GET"])
 def login():
