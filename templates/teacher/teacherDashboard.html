@@ -1,0 +1,142 @@
+{% extends "shared/BaseLoggedIn.html" %}
+{% block title %}Teacher Dashboard{% endblock %}
+{% block linkCss %}
+<style>
+  
+    .bdr{
+        border: 2px solid black;
+    }
+
+
+    body {
+        background: rgb(197, 211, 211);
+
+    }
+
+    #row {
+        background: white;
+        border-radius: 30px;
+        box-shadow: 12px 12px 22px grey;
+    }
+
+    
+
+    .btn1 {
+        border: none;
+        outline: none;
+        height: 50px;
+        width: 100%;
+        background-color: black;
+        color: white;
+        border-radius: 4px;
+        font-weight: bold;
+    }
+
+    .btn1:hover {
+        background: white;
+        border: 2px solid;
+        color: black;
+    }
+</style>
+
+{% endblock %}
+
+
+{% block homeActive %} {% endblock %}
+
+{% block aboutActive %} {% endblock %}
+
+{% block contactUsActive %}{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5  ">
+    <div class="row">
+        <div class="col p-3">
+            <h3 id="welcome">{{questionsjson}}</h3>
+            <form method="POST" action="/generate_test" enctype="multipart/form-data">
+                <div class="form-group">
+                    <textarea class="form-control" id="rawdata" name="rawdata" rows="10" placeholder="Enter content to generate questions..."></textarea>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" id="objradio" name="testradio" value=0 id="flexRadioDefault1" required>
+                    <label class="form-check-label" for="objradio">
+                        Objective Type
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" id="subradio" type="radio" name="testradio" value=1 id="flexRadioDefault2" required>
+                    <label class="form-check-label" for="subradio">
+                        Subjective Type
+                    </label>
+                </div>
+                <input type="hidden" id="teacherId" name="teacherId" value="">
+                <input type="hidden" id="subject" name="subject" value="">
+                <button class="btn btn-primary" type="submit"> Generate Test </button>
+            </form>
+        </div>
+        <div class="col m-3 p-3 border border-2 border-dark rounded-2">
+            <div class="col">
+                <h3>Active Tests</h3>
+                <div id="tests">
+                    
+                    </ul>
+                </div>
+               
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+{% endblock %}
+
+{% block linkJs %}
+<script>
+    jsonstrteacher = '{{teacher}}';
+    jsonstrtests = '{{tests}}';
+    teacher = JSON.parse(jsonstrteacher.replace(/&#34;/g,'"')); 
+    tests = JSON.parse(jsonstrtests.replace(/&#34;/g,'"')); 
+    console.log(teacher)
+    console.log(tests)
+
+$( window ).on( "load", function() {
+    displayWelcome();
+    activetest();
+    });
+function displayWelcome(){
+    $("#welcome").html(`Welcome Teacher, ${teacher[0].name} (${teacher[0].subject})`)
+    $('#teacherId').val(teacher[0].id)
+    $('#subject').val(teacher[0].subject)
+}
+
+function activetest(){
+    if(tests.length == 0){
+        $("#tests").html("There is currenty no test pending")
+    }
+    else {
+        renderhtml = ""
+        for(let i=0 ; i<tests.length; i++){
+            
+            renderhtml+=`<div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-8">
+                                    <h5 class="mb-1">${tests[i].subject}</h5>
+                                    <p class=" mb-0">Type:${tests[i].type} </p>
+                                    <p>Dated:${tests[i].datesubmitted} </p>
+                                </div>
+                                <div class="col-4 d-flex align-items-center">
+                                    <a href="/result/${tests[i].id}" class="btn btn-primary" style="height:50%;">View Result</a> 
+                                </div>
+                            </div>                          
+                        </div>
+                      </div>`
+        }
+        $("#tests").html(renderhtml)
+    }    
+}
+
+</script>
+
+{% endblock %}

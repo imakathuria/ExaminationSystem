@@ -67,6 +67,13 @@ class database:
         self.connection.commit()
         print("Test added successfully")
 
+    def set_subjective_test(self,teacherid,subject,testtype,datesubmitted,questions,answers_set):
+        answers = json.dumps(answers_set)
+        db = self.connection.cursor()
+        db.execute("INSERT INTO Test(teacherid,subject,type,datesubmitted,question1,question2,answers) VALUES(?,?,?,?,?,?,?)",(teacherid,subject,testtype,datesubmitted,questions[0],questions[1],answers))
+        self.connection.commit()
+        print("Test added successfully")
+
     def get_testsbyid(self, id):
         db = self.connection.cursor()
         db.execute("SELECT id,subject,type,datesubmitted FROM Test WHERE teacherid = ?",str(id))
@@ -84,7 +91,7 @@ class database:
 
     def get_resultbytestid(self,id):
         db = self.connection.cursor()
-        db.execute("SELECT * FROM Result WHERE teacherid = ?",str(id))
+        db.execute("SELECT * FROM Result WHERE testid = ?",(id,))
         rows = db.fetchall()
         jsonstr = json.dumps([dict(ix) for ix in rows])
         print(jsonstr)
@@ -126,3 +133,10 @@ class database:
         jsonstr = json.dumps([dict(ix) for ix in rows])
         print(jsonstr)
         return jsonstr
+
+    def get_resultforCSV(self,id):
+        db = self.connection.cursor()
+        db.execute("SELECT * FROM Result WHERE testid = ?",(id,))
+        rows = db.fetchall()
+        print(rows[0]["student"])
+        return rows

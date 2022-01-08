@@ -1,0 +1,117 @@
+{% extends "shared/BaseLoggedIn.html" %}
+{% block title %}Students Result{% endblock %}
+{% block linkCss %}
+<style>
+    .table-bordered th, .table-bordered td {
+        border: 1px solid #000000;
+    }
+
+    body {
+        background: rgb(197, 211, 211);
+
+    }
+
+    #row {
+        background: white;
+        border-radius: 30px;
+        box-shadow: 12px 12px 22px grey;
+    }
+
+    img {
+        border-top-left-radius: 30px;
+        border-bottom-left-radius: 30px;
+
+    }
+
+    .btn1 {
+        border: none;
+        outline: none;
+        height: 50px;
+        width: 100%;
+        background-color: black;
+        color: white;
+        border-radius: 4px;
+        font-weight: bold;
+    }
+
+    .btn1:hover {
+        background: white;
+        border: 2px solid;
+        color: black;
+    }
+</style>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container pt-5">
+    <h3 class="p-2" id="welcome"></h3>
+
+            <div class="row">
+                <div class="col-12" id="root">
+                   
+                </div>
+                
+                    <div class="col-md-12  text-right" id="downloadbtn">
+                        
+                    </div>
+                
+            </div>
+        </div>
+
+{% endblock %}
+
+{% block linkJs %}
+<script>
+    jsonstrresult = '{{result}}';
+    result = JSON.parse(jsonstrresult.replace(/&#34;/g, '"'));
+    console.log(result)
+
+    $(window).on("load", function () {
+        displayWelcome();
+        displayResult();
+    });
+    function displayWelcome() {
+        $("#welcome").html(`${result[0].subject} - ${result[0].testtype}`)
+        $("#downloadbtn").html(`<a href="/downloadcsv/${result[0].testid}" class="btn btn-primary" >Download CSV</a>`)
+    }
+
+    function displayResult(){
+        renderHtml = "";
+        if(result.length>0){
+            renderHtml+=` <table class="table table-bordered" style="border-radius: 5px; background-color: white;">
+                        <thead>
+                            <tr>
+                                <th scope="col">Roll No.</th>
+                                <th scope="col">Student Name</th>
+                                <th scope="col">Marks</th>
+                                <th scope="col">Result</th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>`
+            for(var i=0 ; i<result.length;i++){
+            renderHtml+=`   <tr>
+                                <td scope="col">${result[i].studentroll}</th>
+                                <td scope="col">${result[i].student}</td>
+                                <td scope="col">${result[i].marks}</td>
+                                <td scope="col">${result[i].result}</td>
+                            </tr>`
+            }
+            renderHtml+=`
+                        </tbody>
+                    </table>`
+        }
+        else{
+            renderHtml = "<h2>No Students Attempted test</h2>";
+        }
+        
+        $("#root").html(renderHtml);
+    }
+
+  
+
+</script>
+{% endblock %}

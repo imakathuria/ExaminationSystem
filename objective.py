@@ -15,7 +15,7 @@ class ObjectiveTest:
 	def __init__(self, rawdata: str):
 		"""Class constructor.
 		Args:
-			filepath (str): filepath (str): Absolute filepath to the subject corpus.
+			rawdata (str): rawdata (str): Absolute rawdata of the subject corpus.
 		"""
 		# Load subject corpus
 		print("contructor OT")

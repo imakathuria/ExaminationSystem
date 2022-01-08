@@ -1,4 +1,4 @@
-{% extends "BaseLoggedIn.html" %}
+{% extends "shared/BaseLoggedIn.html" %}
 {% block title %}Objective Test{% endblock %}
 {% block linkcss %}
 {% endblock %}
@@ -34,37 +34,15 @@
                 <label class="form-label">Question 1: <span id="que1"></span></label>
             </div>
             <div class="mb-8">
-                <label for="objectiveans1" class="form-label">Answer</label>
-                <input class="form-control form-control-lg" name="objectiveans1" type="text">
+                <label for="subjectiveans1" class="form-label">Answer</label>
+                <textarea class="form-control form-control-lg" name="subjectiveans1" type="text"></textarea>
             </div>
             <div class="mb-8">
                 <label class="form-label">Question 2: <span id="que2"></span></label>
             </div>
             <div class="mb-8">
-                <label for="objectiveans2" class="form-label">Answer</label>
-                <input class="form-control form-control-lg" name="objectiveans2" type="text"
-                    aria-label=".form-control-lg example">
-            </div>
-            <div class="mb-8">
-                <label class="form-label">Question 3: <span id="que3"></span></label>
-            </div>
-            <div class="mb-3">
-                <label for="objectiveans3" class="form-label">Answer</label>
-                <input class="form-control form-control-lg" name="objectiveans3" type="text">
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Question 4: <span id="que4"></span></label>
-            </div>
-            <div class="mb-3">
-                <label for="objectiveans4" class="form-label">Answer</label>
-                <input class="form-control form-control-lg" name="objectiveans4" type="text">
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Question 5:<span id="que5"></span></label>
-            </div>
-            <div class="mb-3">
-                <label for="objectiveans5" class="form-label">Answer</label>
-                <input class="form-control form-control-lg" name="objectiveans5" type="text">
+                <label for="subjectiveans2" class="form-label">Answer</label>
+                <textarea class="form-control form-control-lg" name="subjectiveans2" type="text"></textarea>
             </div>
 
             <input type="hidden" id="testid" name="testid" value="">
@@ -110,9 +88,6 @@
         $("#studentname").val(student[0].name)
         $("#que1").html(test[0].question1)
         $("#que2").html(test[0].question2)
-        $("#que3").html(test[0].question3)
-        $("#que4").html(test[0].question4)
-        $("#que5").html(test[0].question5)
     }
 
 </script>
