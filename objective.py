@@ -184,14 +184,15 @@ class ObjectiveTest:
 		Returns:
 			list: Answer options.
 		"""
+
 		# In the absence of a better method, take the first synset
 		try:
 			synsets = wn.synsets(word, pos="n")
 		except Exception:
 			logging.exception("Synsets creation failed.", exc_info=True)
-
+		
 		# If there aren't any synsets, return an empty list
-		if len(synsets) == 0:
+		if len(synsets) ==0:
 			return []
 		else:
 			synset = synsets[0]

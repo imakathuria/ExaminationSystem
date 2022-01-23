@@ -38,7 +38,7 @@ class database:
 
     def get_teacher(self, id):
         db = self.connection.cursor()
-        db.execute("SELECT * FROM Teachers where id = ?",str(id))
+        db.execute("SELECT * FROM Teachers where id = ?",(id,))
         rows = db.fetchall()
         jsonstr = json.dumps([dict(ix) for ix in rows])
         return jsonstr;
@@ -76,7 +76,7 @@ class database:
 
     def get_testsbyid(self, id):
         db = self.connection.cursor()
-        db.execute("SELECT id,subject,type,datesubmitted FROM Test WHERE teacherid = ?",str(id))
+        db.execute("SELECT id,subject,type,datesubmitted FROM Test WHERE teacherid = ?",(str(id),))
         rows = db.fetchall()
         jsonstr = json.dumps([dict(ix) for ix in rows])
         print(jsonstr)
